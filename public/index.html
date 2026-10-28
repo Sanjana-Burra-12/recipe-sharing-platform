@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Discover, save, and share your favorite recipes.">
+  <title>Recipe Haven | Share Something Delicious</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="Recipe Haven home"><span class="brand-mark">✦</span> recipe<span>haven</span></a>
+    <nav class="nav-links"><a href="#discover">Discover</a><a href="#how-it-works">About</a></nav>
+    <button class="btn btn-primary header-add" id="open-add">＋ Share a recipe</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow"><span class="eyebrow-dot"></span> GOOD FOOD, GOOD MOOD</span>
+        <h1>Every recipe has<br> a <em>story.</em></h1>
+        <p>Find your next favorite dish, share family treasures, and bring a little more joy to every table.</p>
+        <a class="btn btn-primary hero-btn" href="#discover">Explore recipes <span>↘</span></a>
+        <div class="hero-proof"><div class="avatar-stack"><span>🍓</span><span>🥑</span><span>🍋</span></div><span><strong>Made for food lovers</strong><br><small>Cook, create, share.</small></span></div>
+      </div>
+      <div class="hero-art">
+        <div class="hero-image"></div>
+        <div class="floating-note note-top"><span>✿</span> Made with love</div>
+        <div class="floating-note note-bottom"><span class="note-icon">♡</span><div><strong>Your kitchen, your story</strong><small>Recipes worth passing on</small></div></div>
+        <span class="hero-sparkle sparkle-one">✳</span><span class="hero-sparkle sparkle-two">✦</span>
+      </div>
+    </section>
+
+    <section class="discover section-wrap" id="discover">
+      <div class="section-heading">
+        <div><span class="eyebrow">THE COMMUNITY TABLE</span><h2>Find your next <em>favorite</em></h2><p>Fresh ideas for whatever you're craving.</p></div>
+        <button class="btn btn-outline" id="open-add-secondary">＋ Add your recipe</button>
+      </div>
+      <div class="toolbar">
+        <label class="search-box"><span>⌕</span><input id="search-input" type="search" placeholder="Search recipes or ingredients..." aria-label="Search recipes"><kbd>↵</kbd></label>
+        <div class="filter-group" id="category-filters">
+          <button class="filter-chip active" data-category="All">All recipes</button>
+          <button class="filter-chip" data-category="Breakfast">Breakfast</button>
+          <button class="filter-chip" data-category="Lunch">Lunch</button>
+          <button class="filter-chip" data-category="Dinner">Dinner</button>
+          <button class="filter-chip" data-category="Dessert">Dessert</button>
+          <button class="filter-chip" data-category="Snacks">Snacks</button>
+        </div>
+      </div>
+      <div class="results-line"><span id="results-count">Loading recipes...</span><span class="sort-label">Made for sharing <span>♡</span></span></div>
+      <div class="recipe-grid" id="recipe-grid"><div class="loading-state">Gathering something delicious…</div></div>
+      <div class="empty-state hidden" id="empty-state"><div class="empty-emoji">🥣</div><h3>No recipes found just yet</h3><p>Try another search or be the first to share a recipe.</p><button class="btn btn-primary" id="empty-add">Share a recipe</button></div>
+    </section>
+
+    <section class="share-banner section-wrap" id="how-it-works">
+      <div class="banner-decoration">✳</div><div><span class="eyebrow">PASS IT AROUND</span><h2>Your recipe could be<br>someone's new tradition.</h2><p>Share the dishes you love and inspire the next home cook.</p></div>
+      <button class="btn btn-light" id="banner-add">Share your recipe <span>↗</span></button>
+    </section>
+  </main>
+
+  <footer><a class="brand footer-brand" href="#"><span class="brand-mark">✦</span> recipe<span>haven</span></a><p>A little inspiration for your everyday table.</p><span>Made with ♡ for food lovers</span></footer>
+
+  <dialog id="recipe-dialog" class="recipe-dialog">
+    <form id="recipe-form">
+      <div class="dialog-head"><div><span class="eyebrow">FROM YOUR KITCHEN</span><h2 id="dialog-title">Share a recipe</h2></div><button type="button" class="close-btn" id="close-dialog" aria-label="Close dialog">×</button></div>
+      <input type="hidden" id="recipe-id">
+      <div class="form-grid">
+        <label class="field full">Recipe title *<input id="title" required maxlength="120" placeholder="e.g. Creamy tomato pasta"></label>
+        <label class="field full">Short description *<textarea id="description" required rows="2" placeholder="What makes this recipe special?"></textarea></label>
+        <label class="field full">Ingredients * <small>(one ingredient per line)</small><textarea id="ingredients" required rows="4" placeholder="2 cups pasta&#10;1 cup tomato sauce&#10;1 tbsp olive oil"></textarea></label>
+        <label class="field full">Instructions *<textarea id="instructions" required rows="4" placeholder="Write the steps, one per line..."></textarea></label>
+        <label class="field">Category *<select id="category" required><option>Breakfast</option><option>Lunch</option><option>Dinner</option><option>Dessert</option><option>Snacks</option><option>Drinks</option><option>Other</option></select></label>
+        <label class="field">Your name *<input id="author" required maxlength="80" placeholder="Your name"></label>
+        <label class="field">Prep time (minutes)<input id="prep-time" type="number" min="0" value="10"></label>
+        <label class="field">Cook time (minutes)<input id="cook-time" type="number" min="0" value="20"></label>
+        <label class="field">Servings<input id="servings" type="number" min="1" value="2" required></label>
+        <label class="field">Image URL <small>(optional, must be a public image link)</small><input id="image-url" type="url" placeholder="https://example.com/food.jpg"></label>
+      </div>
+      <p class="form-error hidden" id="form-error" role="alert"></p>
+      <div class="dialog-actions"><button type="button" class="btn btn-outline" id="cancel-dialog">Cancel</button><button type="submit" class="btn btn-primary" id="save-recipe">Publish recipe ↗</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="detail-dialog" class="detail-dialog"><button class="close-btn detail-close" id="close-detail" aria-label="Close details">×</button><div id="detail-content"></div></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
